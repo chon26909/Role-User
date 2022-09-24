@@ -1,17 +1,18 @@
-import { useState, useEffect } from "react";
+import { FC } from "react";
 import "./App.scss";
-import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import AdminPage from "./pages/AdminPage";
 
-function App() {
-  useEffect(() => {
-    const fetchData = async () =>
-      await axios.get("https://jsonplaceholder.typicode.com/users");
-    fetchData();
-  }, []);
-
-  const [count, setCount] = useState(0);
-
-  return <div className="App">Hello</div>;
-}
-
+const App: FC = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route path="admin" element={<AdminPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 export default App;
